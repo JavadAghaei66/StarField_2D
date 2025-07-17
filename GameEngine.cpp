@@ -43,8 +43,8 @@ bool GameEngine::InitGameEngine()
 // Fills the stars array with STAR_COUNT new random stars
 void GameEngine::InitGeneration()
 {
-    for (int i = 0; i < STAR_COUNT; i++)
-        stars[i] = NewStar();
+    for (auto &i : stars)
+        i = NewStar();
 }
 
 void GameEngine::Delay()
@@ -63,7 +63,7 @@ struct Star GameEngine::NewStar()
     return Star{x, y, vx, vy, speedFactor};
 }
 
-bool GameEngine::IsRunning()
+bool GameEngine::IsRunning() const
 {
     return is_running;
 }
@@ -76,7 +76,7 @@ void GameEngine::Render()
 
     for (int i = 0; i < STAR_COUNT; i++)
     {
-        struct Star *pstar = &stars[i];
+        Star *pstar = &stars[i];
         double x = pstar->x + CENTER_X;
         double y = pstar->y + CENTER_Y;
         int size = (int)(pstar->speedFactor * 5);
@@ -93,7 +93,7 @@ void GameEngine::MoveStars()
 {
     for (int i = 0; i < STAR_COUNT; i++)
     {
-        struct Star *pstar = &stars[i];
+        Star *pstar = &stars[i];
 
         // Update position
         pstar->x = pstar->x + pstar->vx;

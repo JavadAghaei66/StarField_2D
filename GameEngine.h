@@ -34,7 +34,7 @@ public:
     void InitGeneration();
     void Delay();
     struct Star NewStar();
-    bool IsRunning();
+    bool IsRunning() const;
     void Render();
     void MoveStars();
     void Input();
