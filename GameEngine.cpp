@@ -3,7 +3,6 @@
 GameEngine::GameEngine()
 {
     is_running = true;
-    point_size = 2;
     speed = 0.003;
 }
 

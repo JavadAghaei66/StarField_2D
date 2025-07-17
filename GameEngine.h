@@ -23,7 +23,6 @@ class GameEngine
 {
 private:
     bool is_running;
-    int point_size;
     double speed;
     struct Star stars[STAR_COUNT];
     SDL_Window *window;
