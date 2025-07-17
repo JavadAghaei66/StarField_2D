@@ -1,13 +1,13 @@
-#include "GameEngine.h"
+#include "StarField.h"
 
-GameEngine::GameEngine()
+StarField::StarField()
 {
     is_running = true;
     speed = 0.003;
 }
 
 // Initializes SDL, creates window & surface, and generates stars
-bool GameEngine::InitGameEngine()
+bool StarField::InitStarField()
 {
     if (SDL_Init(SDL_INIT_VIDEO) > 0)
     {
@@ -41,19 +41,19 @@ bool GameEngine::InitGameEngine()
 }
 
 // Fills the stars array with STAR_COUNT new random stars
-void GameEngine::InitGeneration()
+void StarField::InitGeneration()
 {
     for (auto &i : stars)
         i = NewStar();
 }
 
-void GameEngine::Delay()
+void StarField::Delay()
 {
     SDL_Delay(1000 * speed);
 }
 
 // Returns a new star with random position, velocity, and speedFactor
-struct Star GameEngine::NewStar()
+struct Star StarField::NewStar()
 {
     double x = ((double)rand() / RAND_MAX) * 200 - 100;
     double y = ((double)rand() / RAND_MAX) * 200 - 100;
@@ -63,13 +63,13 @@ struct Star GameEngine::NewStar()
     return Star{x, y, vx, vy, speedFactor};
 }
 
-bool GameEngine::IsRunning() const
+bool StarField::IsRunning() const
 {
     return is_running;
 }
 
 // Draws black background and renders each star
-void GameEngine::Render()
+void StarField::Render()
 {
     SDL_Rect black_rect = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
     SDL_FillRect(surface, &black_rect, COLOR_BLACK);
@@ -89,7 +89,7 @@ void GameEngine::Render()
 }
 
 // Updates star positions and regenerates stars that go off-screen
-void GameEngine::MoveStars()
+void StarField::MoveStars()
 {
     for (int i = 0; i < STAR_COUNT; i++)
     {
@@ -113,7 +113,7 @@ void GameEngine::MoveStars()
 }
 
 // Handles SDL events (currently only quit)
-void GameEngine::Input()
+void StarField::Input()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -124,7 +124,7 @@ void GameEngine::Input()
 }
 
 // Cleans up resources and shuts down SDL
-void GameEngine::Quit()
+void StarField::Quit()
 {
     if (window)
     {

@@ -19,7 +19,7 @@ struct Star
     double speedFactor;
 };
 
-class GameEngine
+class StarField
 {
 private:
     bool is_running;
@@ -29,8 +29,8 @@ private:
     SDL_Surface *surface;
 
 public:
-    GameEngine();
-    bool InitGameEngine();
+    StarField();
+    bool InitStarField();
     void InitGeneration();
     void Delay();
     struct Star NewStar();
